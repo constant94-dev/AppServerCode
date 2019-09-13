@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($userEmail) || empty($userPassword) || empty($userName)) {
         echo "POST값없음";
     } else {
-        // 데이터베이스에 계정이 존재하는지 검색하기 위한 SQL
+        // 데이터베이스에 계정을 삽입하기 위한 SQL
         $signUpSQL = "INSERT INTO accommodation_join(email,password,name,create_time,update_time) VALUES('$userEmail','$userPassword','$userName',now(),now())";
     
         if(mysqli_query($con, $signUpSQL)){
