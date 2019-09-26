@@ -9,6 +9,7 @@ $placeName = $_POST['placeName'];
 $placeTime = $_POST['placeTime'];
 $placeScore = $_POST['placeScore'];
 $placeImage = $_POST['placeImage'];
+$placeReview = $_POST['placeReview'];
 $writer = $_POST['writer'];
 
 //echo $placeName." ".$placeTime." ".$placeScore." ".$placeImage." ".$writer." ";
@@ -17,7 +18,7 @@ $writer = $_POST['writer'];
 //if (isset($placeName) && isset($placeTime) && isset($placeScore) && isset($placeImage) && isset($writer)) {
 
 // 데이터베이스에 리뷰를 삽입하기 위한 SQL
-$reviewAddSQL = "INSERT INTO accommodation_review(place_name, place_time, place_score, place_image, create_time, update_time, writer) VALUES('$placeName','$placeTime','$placeScore','$placeImage',now(),now(),'$writer')";
+$reviewAddSQL = "INSERT INTO accommodation_review(place_name, place_time, place_score, place_image, place_review,create_time, update_time, writer) VALUES('$placeName','$placeTime','$placeScore','$placeImage','$placeReview',now(),now(),'$writer')";
 // 추가한 리뷰 마지막 넘버 가져오기 위한 SQL
 $reviewMaxNumSQL = "SELECT MAX(place_num) AS max_number FROM accommodation_review";
 

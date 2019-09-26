@@ -8,11 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $placeName = $_GET['placeName'];
     $placeImage = $_GET['placeImage'];
     $placeTime = $_GET['placeTime'];
-    $placeScore = $_GET['placeScore'];    
+    $placeScore = $_GET['placeScore'];
+    $placeReview = $_GET['placeReview'];
     $writer = $_GET['writer'];
 
 
-    $reviewUpdateSQL = "UPDATE accommodation_review SET place_name = '$placeName', place_image = '$placeImage', place_time = '$placeTime', place_score = '$placeScore', update_time = now() WHERE place_num = '$placeNum'";
+    $reviewUpdateSQL = "UPDATE accommodation_review SET place_name = '$placeName', place_image = '$placeImage', place_time = '$placeTime', place_score = '$placeScore', place_review = '$placeReview', update_time = now() WHERE place_num = '$placeNum'";
     //$result = mysqli_query($con, $reviewUpdateSQL);
 
     if (mysqli_query($con, $reviewUpdateSQL)) {

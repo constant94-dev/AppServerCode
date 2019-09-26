@@ -4,7 +4,7 @@ include 'db_config/connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    $reviewSelectSQL = "SELECT * FROM accommodation_review ORDER BY place_num DESC";
+    $reviewSelectSQL = "SELECT * FROM accommodation_review ORDER BY place_score DESC";
     $result = mysqli_query($con, $reviewSelectSQL);
 
     // 쿼리 결과가 0 보다 클때 조건 시작
