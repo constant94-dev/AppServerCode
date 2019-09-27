@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             'email'=>$row['comment_email'],
             'time'=>$row['update_time'],
             'cnum'=>$row['comment_num'],
+            'writer'=>$row['comment_writer'],
             'comment'=>$row['comment'])
             );
         } // 반복문 끝
