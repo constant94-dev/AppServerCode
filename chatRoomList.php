@@ -2,7 +2,11 @@
 // 데이터베이스 연결 파일
 include 'db_config/connect.php';
 
-$chatRoomSelectSQL = "SELECT * FROM accommodation_chatroom ORDER BY chatroom_num DESC";
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+$chatRoomCreator = $_GET['creator'];
+
+$chatRoomSelectSQL = "SELECT * FROM accommodation_chatroom WHERE chatroom_names LIKE '%$chatRoomCreator%' OR chatroom_creator = '$chatRoomCreator' ORDER BY chatroom_num DESC";
 $result = mysqli_query($con, $chatRoomSelectSQL);
 
 // 쿼리 결과가 0 보다 클때 조건 시작
@@ -33,6 +37,7 @@ if (mysqli_num_rows($result) > 0) {
 
     $json = json_encode(array('result'=>$data));
     echo $json;
+}
 }
 
 ?>

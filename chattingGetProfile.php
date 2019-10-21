@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $chattingProfileSQL = "SELECT * FROM accommodation_profile WHERE profile_email = '$chattingEmail'";
     $result = mysqli_query($con, $chattingProfileSQL);
-
+   
     // 쿼리 결과가 0 보다 클때 조건 시작
     if (mysqli_num_rows($result) > 0) {
 

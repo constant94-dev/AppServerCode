@@ -7,10 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $chatRoomNames = $_GET['names'];
     $chatRoomImages = $_GET['images'];
+    $chatRoomCreator = $_GET['creator'];
 
     //echo  "이미지 : ".$chatRoomImages." / 이름 : ".$chatRoomNames;
 
-    $chatRoomSQL = "INSERT INTO accommodation_chatroom(chatroom_names, chatroom_images, create_time, update_time) VALUES('$chatRoomNames', '$chatRoomImages',now(),now())";
+    $chatRoomSQL = "INSERT INTO accommodation_chatroom(chatroom_names, chatroom_images, create_time, update_time, chatroom_creator) VALUES('$chatRoomNames', '$chatRoomImages',now(),now(), '$chatRoomCreator')";
 
     // 데이터베이스에 댓글 정보 insert 성공할 때 조건 시작
     if (mysqli_query($con, $chatRoomSQL)) {    

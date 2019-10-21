@@ -5,8 +5,9 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
-public class newMainServer {
+public class TestMainServer {
 
 	private ServerSocket server;
 
@@ -15,11 +16,13 @@ public class newMainServer {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		RoomManager roomManager = new RoomManager();
 
-		new newMainServer();
+		roomManager.createRoom();
+		new TestMainServer();
 	} // main method Only call is good
 
-	public newMainServer() {
+	public TestMainServer() {
 		try {
 
 			user_list = new ArrayList<ChatUser>();
@@ -72,14 +75,18 @@ public class newMainServer {
 				DataOutputStream dos = new DataOutputStream(os);
 
 				// name receive
-				String nickName = dis.readUTF();
+				String nameANDimage = dis.readUTF();
+				String[] nameANDimageSplit = nameANDimage.split(":");
+
+				System.out.println("nameANDimage" + nameANDimage);
+
 				// welcome message send
-				dos.writeUTF("name " + nickName);
-				System.out.println("name " + nickName + " sir access");
+				dos.writeUTF("name " + nameANDimageSplit[0]);
+				System.out.println("name " + nameANDimageSplit[0] + " sir access");
 				// Already access client message send
-				sendToClient("name " + nickName);
+				sendToClient("name " + nameANDimageSplit[0]);
 				// client infomation management Object create
-				ChatUser user = new ChatUser(nickName, socket);
+				ChatUser user = new ChatUser(nameANDimageSplit[0], nameANDimageSplit[1], socket);
 				user.start();
 				user_list.add(user);
 			} catch (Exception e) {
@@ -87,45 +94,6 @@ public class newMainServer {
 			}
 		}
 	} // NickNameThread class end
-
-	// User information management class
-	class ChatUser extends Thread {
-		String nickName;
-		String profileImage;
-		Socket socket;
-		DataInputStream dis;
-		DataOutputStream dos;
-
-		public ChatUser(String nickName, Socket socket) {
-			try {
-				this.nickName = nickName;
-				this.socket = socket;
-				InputStream is = socket.getInputStream();
-				OutputStream os = socket.getOutputStream();
-				dis = new DataInputStream(is);
-				dos = new DataOutputStream(os);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		// User message receive Thread
-		public void run() {
-			try {
-				while (true) {
-					// User message receive
-					String msg = dis.readUTF();
-					System.out.println("message:" + nickName + ":" + msg);
-					// Clients message send
-					sendToClient("message:" + nickName + ":" + msg);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-	} // UserClass class end
 
 	public synchronized void sendToClient(String msg) {
 		try {
