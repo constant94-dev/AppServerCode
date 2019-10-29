@@ -12,6 +12,17 @@ public class ChatRoom {
 	private int id; // room ID
 	private List userList;
 
+	public ChatRoom(List users) {
+	        this.userList = users;
+
+	        // room in
+	        for(ChatUser user : users){
+	            user.enterRoom(this);
+	        }
+
+	        
+	}
+
 	public synchronized void sendToClient(String msg) {
 		try {
 			// Repeat as clients
