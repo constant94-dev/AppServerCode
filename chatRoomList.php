@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 $chatRoomCreator = $_GET['creator'];
 
-$chatRoomSelectSQL = "SELECT * FROM accommodation_chatroom WHERE chatroom_names LIKE '%$chatRoomCreator%' OR chatroom_creator = '$chatRoomCreator' ORDER BY chatroom_num DESC";
+$chatRoomSelectSQL = "SELECT * FROM accommodation_chatroom WHERE chatroom_names LIKE '%$chatRoomCreator%' OR chatroom_creator LIKE '%$chatRoomCreator%' ORDER BY chatroom_num DESC";
 $result = mysqli_query($con, $chatRoomSelectSQL);
 
 // 쿼리 결과가 0 보다 클때 조건 시작
@@ -20,8 +20,10 @@ if (mysqli_num_rows($result) > 0) {
         array_push($data,
             array('num'=>$row['chatroom_num'],
             'names'=>$row['chatroom_names'],
-            'images'=>$row['chatroom_images'])            
-            );
+            'images'=>$row['chatroom_images'],
+            'creator'=>$row['chatroom_creator'],
+            'lastmessage'=>$row['chatroom_lastmessage'])
+    );
        
     } // 채팅방 목록 반복문 끝
 

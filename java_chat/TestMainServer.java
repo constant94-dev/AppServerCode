@@ -214,8 +214,10 @@ public class TestMainServer {
 
 				System.out.println("ALL Client list save -> " + userSend.get(i).toString());
 
-				userMap.get(userSend.get(i)).writeUTF(
-						resultRoomNumSplit[1] + ":" + resultSendClientSplit[1] + ":" + resultSendMessageSplit[1]);
+				userMap.get(userSend.get(i)).writeUTF("roomNum:" + resultRoomNumSplit[1] + "sendUser:"
+						+ resultSendClientSplit[1] + "sendMessage:" + resultSendMessageSplit[1]);
+
+				System.out.println("Client message send -> " + userSend.get(i).toString());
 
 			}
 
